@@ -47,16 +47,6 @@ h1 {
   padding: 18px;
 }
 
-#clear {
-  border: 2px solid;
-  margin-top: 10px;
-  text-align: center;
-  padding: 5px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  background-color: lightcyan;
-}
-
 #erase {
   border: 2px solid;
   margin-top: 50px;
@@ -67,12 +57,40 @@ h1 {
   background-color: lightcyan;
 }
 
-#clear:hover, #erase:hover{
+#clear {
+  border: 2px solid;
+  margin-top: 10px;
+  text-align: center;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  background-color: lightcyan;
+}
+
+
+#randomize {
+  border: 2px solid;
+  margin-top: 10px;
+  text-align: center;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  background-color: lightcyan;
+}
+
+#clear:hover, #erase:hover, #randomize:hover{
   background-color: aliceblue;
 }
 
-#clear:active, #erase:active {
+#clear:active, #erase:active, #randomize:active {
   background-color: cornflowerblue;
   border: 2px inset aliceblue;
 }
 
+#current {
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  border: 2px solid;
+  margin-bottom: 20px;
+}

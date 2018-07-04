@@ -1,6 +1,5 @@
 (function pixelPainter() {
   let isMouseDown = false;
-  let eraseMouseDown = false;
   const mainDiv = document.getElementById('pixelPainter');
 
   const sidebar = document.createElement('div');        //side bar - contains swatch/buttons
@@ -33,15 +32,10 @@
         function dragPaint(event) {                                 //paint on drag
           if (!!isMouseDown) {
             event.target.style.backgroundColor = selectedColor;
-          }else{
-            !!eraseMouseDown && event.target.style.backgroundColor != 'white';
-            event.target.style.padding = '3px'
-            event.target.style.backgroundColor = 'white';
           }
         }
         function stopPaint() {                                      //stop painting
           isMouseDown = false;
-          eraseMouseDown = false;
         }
       }
     }
@@ -49,16 +43,21 @@
 
   generateCanvas(130, 200);
 
-  let selectedColor;                                    //contains color that is selected
+  let selectedColor;                                         //contains color that is selected
 
-  let colorSwatch = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple', 'black', 'white', 'pink', 'coral', 'navajowhite', 'lightgreen', 'cornflowerblue', 'plum', 'slateblue', 'gray', 'lightgray', 'saddlebrown', 'sienna']
+  let colorSwatch = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple', 'black', 'goldenrod', 'pink', 'coral', 'navajowhite', 'lightgreen', 'cornflowerblue', 'orchid', 'slateblue', 'gray', 'lightgray', 'saddlebrown', 'sienna']
 
-  let swatchRow = document.createElement('div');
+  let swatchRow = document.createElement('div');             //creates swatch, CSS displays as grid
   swatchRow.className = 'swatch-rows';
   sidebar.appendChild(swatchRow);
 
+  const currentColor = document.createElement('div');        //Shows current color
+  currentColor.id = 'current';
+  sidebar.appendChild(currentColor);
+  currentColor.innerHTML = 'Current Color'
 
-  for (let j = 0; j < 20; j++) {                           //creates swatch, CSS displays as grid
+
+  for (let j = 0; j < 20; j++) {                           
     let swatchCells = document.createElement('div');
     swatchCells.className = 'swatch-cells';
     sidebar.appendChild(swatchCells);
@@ -66,8 +65,15 @@
     swatchCells.style.display = 'inline-block';
     swatchCells.addEventListener('click', selectColor);     //event listener, click to select color
 
-    function selectColor() {
+    function selectColor() {                                
       selectedColor = swatchCells.style.backgroundColor;
+      currentColor.style.backgroundColor = selectedColor;
+      currentColor.innerHTML = 'Current Color';
+      if (selectedColor === 'black'){
+        currentColor.style.color = 'white';
+      }else{
+        currentColor.style.color = 'black';
+      }
     }
   }
 
@@ -79,7 +85,9 @@
   eraseBut.addEventListener('click', eraseWork)
 
   function eraseWork() {
-    eraseMouseDown = true;
+    selectedColor = 'white';
+    currentColor.innerHTML = 'Erase'
+    currentColor.style.backgroundColor = null;
   }
 
 
@@ -96,27 +104,26 @@
     }
   }
 
-  // const randomBut = document.createElement('div');        //random button, changes swatch
-  // randomBut.id = 'randomize';
-  // randomBut.innerHTML = 'Change Colors';
-  // sidebar.appendChild(randomBut);
-  // randomBut.addEventListener('click', randomColors);
+  const randomBut = document.createElement('div');        //random button, changes swatch
+  randomBut.id = 'randomize';
+  randomBut.innerHTML = 'Change Colors';
+  sidebar.appendChild(randomBut);
+  randomBut.addEventListener('click', randomColors);
 
-  // function generateRandomColor() {
-  //   let letters = '0123456789ABCDEF';
-  //   let hex = '#';
-  //   for (let i = 0; i < 6; i++) {
-  //     hex += letters[Math.floor(Math.random() * 16)];
-  //   };
-  //   return hex;
-  // }
+  function generateRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let hex = '#';
+    for (let i = 0; i < 6; i++) {
+      hex += letters[Math.floor(Math.random() * 16)];
+    };
+    return hex;
+  }
 
-  // function randomColors() {
-  //   colorSwatch = [];
-  //   while (colorSwatch.length < 21) {
-  //     colorSwatch.push(generateRandomColor());
-  //   }
-  //   sidebar.appendChild(generateSwatch());
-  // }
+  function randomColors() {
+    let swatches = document.getElementsByClassName('swatch-cells');
+    for (let i = 0; i < swatches.length; i++){
+      swatches[i].style.backgroundColor = generateRandomColor();
+    }
+  }
 
 }());
