@@ -132,21 +132,31 @@
   fillBut.id = 'fill';
   fillBut.innerHTML = 'Fill';
   sidebar.appendChild(fillBut);
-  fillBut.addEventListener('click', activateFill);
+  fillBut.addEventListener('click', toggleFill);
+  let fillStatus = false;
 
-  function activateFill(){
-    let cell = document.getElementsByClassName('columns');
-    for (let i = 0; i < cell.length; i++){
-      cell[i].addEventListener('click', fillArea)
-    }
-    function fillArea() {
-      for (let j = 0; j < cell.length; j++){
-        if (!!this.style.backgroundColor){
-          this.nextSibling.style.backgroundColor = selectedColor;
-          this.previousSibling.style.backgroundColor = selectedColor;
-          
+  function toggleFill(){                              //toggles between fill and draw
+    if (fillStatus === false){
+      fillStatus = true;
+        currentColor.innerHTML = 'Fill';
+        fillBut.style.backgroundColor = 'cornflowerblue';
+        let cell = document.getElementsByClassName('columns');
+        for (let i = 0; i < cell.length; i++){
+          cell[i].addEventListener('click', fillArea)
         }
-      }
+    
+        function fillArea() {
+          for (let j = 0; j < cell.length; j++){
+            if (!!this.style.backgroundColor){
+              this.nextSibling.style.backgroundColor = selectedColor;
+              this.previousSibling.style.backgroundColor = selectedColor;
+            }
+          }
+        }
+    }else{
+      fillStatus = false;
+      currentColor.innerHTML = 'Current Color';
+      fillBut.style.backgroundColor = 'lightcyan';
     }
   }
 
