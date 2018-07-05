@@ -37,6 +37,7 @@ h1 {
   margin-right: 25px;
   padding-left: 10px;
   padding-top: 80px;
+  position: relative;
 }
 
 .columns {
@@ -44,6 +45,7 @@ h1 {
   border-style: thin;
   padding: 3px;
   background-color: white;
+  position: relative;
 }
 
 .swatch-cells {
@@ -61,7 +63,7 @@ h1 {
   background-color: lightcyan;
 }
 
-#clear {
+#clear, #randomize, #fill{
   border: 2px solid;
   margin-top: 10px;
   text-align: center;
@@ -71,22 +73,12 @@ h1 {
   background-color: lightcyan;
 }
 
-
-#randomize {
-  border: 2px solid;
-  margin-top: 10px;
-  text-align: center;
-  padding: 5px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  background-color: lightcyan;
-}
-
-#clear:hover, #erase:hover, #randomize:hover{
+#clear:hover, #erase:hover, #randomize:hover, #fill:hover{
   background-color: aliceblue;
 }
 
-#clear:active, #erase:active, #randomize:active {
+#clear:active, #erase:active, #randomize:active,
+#fill:active {
   background-color: cornflowerblue;
   border: 2px inset aliceblue;
 }
@@ -98,3 +90,5 @@ h1 {
   border: 2px solid;
   margin-bottom: 20px;
 }
+
+

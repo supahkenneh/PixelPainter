@@ -41,7 +41,7 @@
     }
   }
 
-  generateCanvas(130, 200);
+  generateCanvas(110, 200);
 
   let selectedColor;                                         //contains color that is selected
 
@@ -57,7 +57,7 @@
   currentColor.innerHTML = 'Current Color'
 
 
-  for (let j = 0; j < 20; j++) {                           
+  for (let j = 0; j < 20; j++) {
     let swatchCells = document.createElement('div');
     swatchCells.className = 'swatch-cells';
     sidebar.appendChild(swatchCells);
@@ -65,20 +65,19 @@
     swatchCells.style.display = 'inline-block';
     swatchCells.addEventListener('click', selectColor);     //event listener, click to select color
 
-    function selectColor() {                                
+    function selectColor() {
       selectedColor = swatchCells.style.backgroundColor;
       currentColor.style.backgroundColor = selectedColor;
       currentColor.innerHTML = 'Current Color';
-      if (selectedColor === 'black'){
+      if (selectedColor === 'black') {
         currentColor.style.color = 'white';
-      }else{
+      } else {
         currentColor.style.color = 'black';
       }
     }
   }
 
-
-  const eraseBut = document.createElement('div');
+  const eraseBut = document.createElement('div');         //erase feature
   eraseBut.id = 'erase';
   eraseBut.innerHTML = 'Erase'
   sidebar.appendChild(eraseBut);
@@ -121,9 +120,35 @@
 
   function randomColors() {
     let swatches = document.getElementsByClassName('swatch-cells');
-    for (let i = 0; i < swatches.length; i++){
+    for (let i = 0; i < swatches.length; i++) {
       swatches[i].style.backgroundColor = generateRandomColor();
     }
   }
+
+
+  //Fill Feature
+
+  const fillBut = document.createElement('div');
+  fillBut.id = 'fill';
+  fillBut.innerHTML = 'Fill';
+  sidebar.appendChild(fillBut);
+  fillBut.addEventListener('click', activateFill);
+
+  function activateFill(){
+    let cell = document.getElementsByClassName('columns');
+    for (let i = 0; i < cell.length; i++){
+      cell[i].addEventListener('click', fillArea)
+    }
+    function fillArea() {
+      for (let j = 0; j < cell.length; j++){
+        if (!!this.style.backgroundColor){
+          this.nextSibling.style.backgroundColor = selectedColor;
+          this.previousSibling.style.backgroundColor = selectedColor;
+          
+        }
+      }
+    }
+  }
+
 
 }());
