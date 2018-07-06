@@ -1,6 +1,6 @@
 (function pixelPainter() {
-  let isMouseDown = false;
   const mainDiv = document.getElementById('pixelPainter');
+  let isMouseDown = false;
 
   const sidebar = document.createElement('div');        //side bar - contains swatch/buttons
   sidebar.id = 'side';                                  //append swatch to here
@@ -21,20 +21,21 @@
         cell.className = 'columns';
         drawDiv.appendChild(cell);
         cell.style.display = 'inline-block';
-        cell.addEventListener('mousedown', paint);        //event listeners
+        cell.addEventListener('mousedown', paint);        //event listeners for drawing
         cell.addEventListener('mouseover', dragPaint);
         cell.addEventListener('mouseup', stopPaint)
+        document.body.addEventListener('mouseup', stopPaint)
 
-        function paint(event) {                                     //paint on click
+        function paint(event) {                                     //draw on click
           event.target.style.backgroundColor = selectedColor;
           isMouseDown = true;
         }
-        function dragPaint(event) {                                 //paint on drag
+        function dragPaint(event) {                                 //draw on drag
           if (!!isMouseDown) {
             event.target.style.backgroundColor = selectedColor;
           }
         }
-        function stopPaint() {                                      //stop painting
+        function stopPaint() {                                      //stop drawing
           isMouseDown = false;
         }
       }
@@ -90,7 +91,7 @@
   }
 
 
-  const clearBut = document.createElement('div');            //clear button, whites out screen
+  const clearBut = document.createElement('div');            //clear button
   clearBut.id = 'clear';
   clearBut.innerHTML = 'Clear';
   sidebar.appendChild(clearBut);
@@ -99,7 +100,7 @@
   function clearAll() {
     let cell = document.getElementsByClassName('columns');
     for (let i = 0; i < cell.length; i++) {
-      cell[i].style.backgroundColor = 'white';
+      cell[i].style.backgroundColor = null;
     }
   }
 

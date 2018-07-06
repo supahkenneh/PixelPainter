@@ -42,7 +42,7 @@ h1 {
 
 .columns {
   display: inline-block;
-  border-style: thin;
+  border-style: none;
   padding: 3px;
   background-color: white;
   position: relative;
